@@ -24,6 +24,22 @@ if [ -n "$TEXT_FILES" ]; then
   fi
 fi
 
+SOURCE_FILES=$(staged_files '*.ts' '*.tsx')
+if [ -n "$SOURCE_FILES" ]; then
+  MISSING=""
+  for ASSET in $(scan_files '"/img/[^"]+"' "$SOURCE_FILES" |
+    grep -oE '"/img/[^"]+"' | tr -d '"' | sort -u); do
+    [ -f "public$ASSET" ] || MISSING="$MISSING$ASSET
+"
+  done
+  if [ -n "$MISSING" ]; then
+    echo "blocked: source references a public asset that is not on disk."
+    echo "a path under public/ is only a string, so the type checker cannot see this."
+    printf '%s' "$MISSING"
+    exit 1
+  fi
+fi
+
 COMPONENT_FILES=$(staged_files '*.tsx')
 if [ -n "$COMPONENT_FILES" ]; then
   HEX=$(scan_files '#[0-9a-fA-F]{6}([^0-9a-fA-F]|$)' "$COMPONENT_FILES")

@@ -1,4 +1,5 @@
 import type { KosSortKey, KosType } from "@/components/(landing)/types/kos";
+import { ASSET_PATHS } from "@/config/assets";
 
 export const KOS_TYPES = [
   "Putra",
@@ -32,21 +33,72 @@ export const PRICE_CEILINGS = [
 ] as const;
 
 export const POPULAR_AREAS = [
-  { name: "Jakarta Selatan", photo: "/img/p27.jpg" },
-  { name: "Yogyakarta", photo: "/img/p25.jpg" },
-  { name: "Bandung", photo: "/img/p14.jpg" },
-  { name: "Surabaya", photo: "/img/p26.jpg" },
-  { name: "Depok", photo: "/img/p03.jpg" },
-  { name: "Semarang", photo: "/img/p09.jpg" },
+  {
+    label: "Kos Jakarta",
+    city: "Jakarta Selatan",
+    photo: `${ASSET_PATHS.city}/kos-jakarta.webp`,
+  },
+  {
+    label: "Kos Jogja",
+    city: "Yogyakarta",
+    photo: `${ASSET_PATHS.city}/kos-yogyakarta.webp`,
+  },
+  {
+    label: "Kos Bandung",
+    city: "Bandung",
+    photo: `${ASSET_PATHS.city}/kos-bandung.webp`,
+  },
+  {
+    label: "Kos Surabaya",
+    city: "Surabaya",
+    photo: `${ASSET_PATHS.city}/kos-surabaya.webp`,
+  },
+  {
+    label: "Kos Malang",
+    city: "Malang",
+    photo: `${ASSET_PATHS.city}/kos-malang.webp`,
+  },
+  {
+    label: "Kos Medan",
+    city: "Medan",
+    photo: `${ASSET_PATHS.city}/kos-medan.webp`,
+  },
 ] as const;
 
 export const POPULAR_CAMPUSES = [
-  "UGM",
-  "UI",
-  "ITB",
-  "ITS",
-  "Undip",
-  "Telkom University",
-  "Universitas Brawijaya",
-  "Binus",
+  {
+    abbreviation: "UGM",
+    city: "Jogja",
+    logo: `${ASSET_PATHS.campus}/ugm-jogja.png`,
+  },
+  {
+    abbreviation: "UNDIP",
+    city: "Semarang",
+    logo: `${ASSET_PATHS.campus}/undip-semarang.png`,
+  },
+  {
+    abbreviation: "UI",
+    city: "Depok",
+    logo: `${ASSET_PATHS.campus}/ui-depok.png`,
+  },
+  {
+    abbreviation: "UNPAD",
+    city: "Jatinangor",
+    logo: `${ASSET_PATHS.campus}/unpad-jatinangor.webp`,
+  },
+  {
+    abbreviation: "STAN",
+    city: "Jakarta",
+    logo: `${ASSET_PATHS.campus}/stan-jakarta.png`,
+  },
+  {
+    abbreviation: "UB",
+    city: "Malang",
+    logo: `${ASSET_PATHS.campus}/ub-malang.png`,
+  },
+  {
+    abbreviation: "UNAIR",
+    city: "Surabaya",
+    logo: `${ASSET_PATHS.campus}/unair-surabaya.png`,
+  },
 ] as const;
