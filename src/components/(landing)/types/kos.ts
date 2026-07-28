@@ -1,5 +1,7 @@
 export type KosType = "Putra" | "Putri" | "Campur";
 
+export type KosRibbon = "rare" | "deposit";
+
 export type KosBadge = "andalan" | "prime" | "promo" | "flash";
 
 export type Kos = {
@@ -18,6 +20,10 @@ export type Kos = {
   roomSize: string;
   badges: KosBadge[];
   vacancy: number;
+  /** Owner written promo copy, shown in place of the rating line. */
+  promoLabel?: string;
+  /** Coloured strip under the photo on flash sale cards. */
+  flashRibbon?: KosRibbon;
   campus?: string;
   campusDistance?: string;
 };
