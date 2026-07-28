@@ -125,8 +125,8 @@ export function SiteFooter() {
         <FooterLinkColumn title="KEBIJAKAN" />
         <FooterContact />
       </div>
-      <div className="border-t border-line">
-        <div className="mami-container flex flex-col items-center gap-4 pb-24 pt-8 sm:flex-row sm:justify-between">
+      <div>
+        <div className="mami-container flex flex-col items-center gap-4 border-t border-line pb-24 pt-8 sm:flex-row sm:justify-between">
           <Image
             alt="Sertifikasi ISO SGS"
             height={56}

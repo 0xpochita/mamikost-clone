@@ -26,8 +26,6 @@ export function PopularAreaSection() {
                 src={area.photo}
                 width={800}
               />
-              {/* Photographs here have bright skies behind the label, so the
-                  scrim is what keeps the text at AA contrast rather than hope. */}
               <span className="absolute inset-0 bg-black/35" />
               <span className="absolute inset-0 flex items-center justify-center px-3 text-center text-3xl font-bold text-white">
                 {area.label}

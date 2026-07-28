@@ -39,9 +39,6 @@ function Cell({ children }: { children: string }) {
   );
 }
 
-/** The clock only starts after mount. Rendering a real time on the server would
- * hydrate against a different second and warn, so the first paint is a
- * placeholder on both sides and therefore always matches. */
 export function PromoCountdown() {
   const [remaining, setRemaining] = useState<CountdownRemaining | null>(null);
 

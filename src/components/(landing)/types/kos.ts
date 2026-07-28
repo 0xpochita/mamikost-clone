@@ -20,9 +20,7 @@ export type Kos = {
   roomSize: string;
   badges: KosBadge[];
   vacancy: number;
-  /** Owner written promo copy, shown in place of the rating line. */
   promoLabel?: string;
-  /** Coloured strip under the photo on flash sale cards. */
   flashRibbon?: KosRibbon;
   campus?: string;
   campusDistance?: string;

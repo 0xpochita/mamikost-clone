@@ -5,9 +5,6 @@ export type NavLink = {
   href: string;
 };
 
-/** The icon travels with its link so the pairing cannot drift. A parallel
- * array indexed by position looks fine and silently mismatches the moment an
- * entry is reordered. */
 export type TopBarLink = NavLink & {
   icon: string;
 };
@@ -45,9 +42,6 @@ export const MAIN_NAV_LINKS: NavLink[] = [
 
 export const SEARCH_MENU_ICON_SIZE = 24;
 
-/** Supplied brand marks travel as asset paths. Generic icons travel as a key
- * that the header maps to a component, so this config never imports React and
- * stays a plain data module. */
 export type SearchMenuIcon =
   | { kind: "asset"; src: string }
   | { kind: "glyph"; name: "bed" | "apartment" | "property" };

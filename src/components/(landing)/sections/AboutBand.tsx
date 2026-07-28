@@ -44,7 +44,7 @@ export function AboutBand() {
   return (
     <section className="mt-10 bg-surface py-12">
       <div className="mami-container">
-        <h2 className="text-center text-lg font-bold text-ink">
+        <h2 className="text-center text-xl font-black text-ink">
           Mamikos - Aplikasi Anak Kos No. 1 di Indonesia
         </h2>
         <p className="mt-6 text-[15px] leading-7 text-ink">
@@ -62,8 +62,6 @@ export function AboutBand() {
           booking kos.
         </p>
 
-        {/* Native disclosure: keyboard accessible, works without JavaScript,
-            and keeps this a Server Component. */}
         <details className="group mt-8">
           <summary className="flex cursor-pointer list-none items-center justify-center gap-2 text-base font-bold text-ink hover:text-mami">
             Fitur yang dapat dimanfaatkan di Mamikos

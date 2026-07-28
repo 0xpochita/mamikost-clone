@@ -10,9 +10,6 @@ const PHOTO_INTRINSIC_HEIGHT = 534;
 const LOW_VACANCY_THRESHOLD = 3;
 const CARD_SIZES = "(max-width: 767px) 80vw, (max-width: 1199px) 45vw, 23vw";
 
-/** Mamikos fills the box with a blurred copy of the photo and lays the sharp
- * one over it at 105% height. Sources are rarely the slot ratio, and this shows
- * the whole frame instead of cropping it. */
 function KosPhoto({ kos }: { kos: Kos }) {
   return (
     <div

@@ -17,8 +17,6 @@ export function CampusSection() {
               className="flex h-full items-center gap-4 rounded-card border border-line bg-white px-5 py-4 transition-colors hover:border-mami focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mami"
               href={`/cari?campus=${encodeURIComponent(campus.abbreviation)}`}
             >
-              {/* Sources range from 240px to 1440px and three are not square,
-                  so contain, never cover: cropping a crest is not an option. */}
               <Image
                 alt={`Logo ${campus.abbreviation}`}
                 className="size-14 shrink-0 object-contain"

@@ -38,7 +38,6 @@ function matchesQuery(kos: Kos, query: KosQuery): boolean {
   return !trimmedKeyword || matchesKeyword(kos, trimmedKeyword);
 }
 
-/** Single query surface shared by the home rails and the search page. */
 export function searchKos(query: KosQuery = {}): Kos[] {
   return KOS_LISTINGS.filter((kos) => matchesQuery(kos, query)).sort(
     SORTERS[query.sort ?? "recommended"],

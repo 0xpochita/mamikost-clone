@@ -1,8 +1,5 @@
 const IMAGE_ROOT = "/img";
 
-/** Public asset folders. A path under `public/` is only ever a string, so the
- * type checker cannot notice when a folder is renamed. Routing every reference
- * through here turns such a move into one edit instead of many. */
 export const ASSET_PATHS = {
   brand: `${IMAGE_ROOT}/logo-brands`,
   icon: `${IMAGE_ROOT}/icon`,

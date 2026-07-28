@@ -1,8 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-/** The one piece both tile grids genuinely share. A generic grid wrapper for
- * two callers would be the speculative abstraction the rules forbid. */
 export function SeeAllTile({
   href,
   className = "",

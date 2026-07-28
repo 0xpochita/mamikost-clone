@@ -4,9 +4,6 @@ import { ASSET_PATHS } from "@/config/assets";
 export const BANNER_INTRINSIC_WIDTH = 817;
 export const BANNER_INTRINSIC_HEIGHT = 346;
 
-/** Paths carry their own extension because the supplied set mixes webp, png,
- * and jpg. Rebuilding a path from an index plus an assumed extension is how
- * these silently 404. */
 export const PROMO_BANNERS: PromoBanner[] = [
   {
     src: `${ASSET_PATHS.banner}/banner-1.webp`,

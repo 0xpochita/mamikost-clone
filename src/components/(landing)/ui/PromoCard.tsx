@@ -10,10 +10,6 @@ const ACTION_CLASS: Record<PromoCardAction["variant"], string> = {
   link: "mt-5 inline-flex text-sm font-bold text-ink underline underline-offset-4 hover:text-mami",
 };
 
-/** Shared shell for the three service cards. It owns the card chrome, the text
- * stack, and both action variants. Placement of `media` stays with the caller
- * because each card positions its visual differently: one bleeds to the card
- * edge, one sits behind the text, one is inline content. */
 export function PromoCard({
   title,
   description,

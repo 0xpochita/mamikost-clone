@@ -27,13 +27,9 @@ import {
 
 const COMPACT_SCROLL_THRESHOLD = 240;
 
-/** Matches `.nav-search:hover:after` in the production stylesheet: a 3px brand
- * bar pinned to the bottom of the full-height nav item, radius 2px 2px 0 0. */
 const NAV_ITEM_CLASS =
   "relative flex h-full items-center px-3 text-sm font-bold text-ink transition-colors hover:text-mami after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:rounded-t-[2px] after:bg-mami after:opacity-0 after:transition-opacity hover:after:opacity-100";
 
-/** Mirrors `.nav-topbar-label`: 12px, weight 700, `#757575`, 18px line box,
- * 8px between the glyph and its label. */
 function TopBarEntry({ link }: { link: TopBarLink }) {
   return (
     <Link
@@ -188,9 +184,6 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
-/** Once the hero search has scrolled away the wordmark shrinks to its mark so
- * the search field can move into the bar itself. The top strip stays put: the
- * reference keeps it visible in the scrolled state. */
 function useCompactHeader() {
   const [isCompact, setIsCompact] = useState(false);
 

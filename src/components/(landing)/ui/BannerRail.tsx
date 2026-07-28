@@ -17,9 +17,6 @@ const COPY_COUNT = 3;
 const ARROW_CLASS =
   "flex size-11 items-center justify-center rounded-full border border-line bg-white text-ink transition-colors hover:border-mami hover:text-mami";
 
-/** Three copies of the list, parked on the middle one. When a scroll drifts
- * into an outer copy it is teleported back by exactly one copy width, which is
- * visually identical, so the rail never reaches an end in either direction. */
 const LOOPED_BANNERS = Array.from({ length: COPY_COUNT }, (_, copy) =>
   PROMO_BANNERS.map((banner) => ({ ...banner, copy })),
 ).flat();
