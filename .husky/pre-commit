@@ -24,14 +24,40 @@ if [ -n "$TEXT_FILES" ]; then
   fi
 fi
 
+ASSETS_CONFIG="src/config/assets.ts"
+
+# Resolves `${ASSET_PATHS.key}/file` by reading the key to folder map straight
+# out of the config, so the hook cannot drift from it.
+resolve_asset_key() {
+  sed -n "s|^[[:space:]]*$1:[[:space:]]*\`\${IMAGE_ROOT}/\([A-Za-z0-9_-]*\)\`.*|\1|p" \
+    "$ASSETS_CONFIG" 2>/dev/null | head -1
+}
+
 SOURCE_FILES=$(staged_files '*.ts' '*.tsx')
 if [ -n "$SOURCE_FILES" ]; then
   MISSING=""
+
   for ASSET in $(scan_files '"/img/[^"]+"' "$SOURCE_FILES" |
     grep -oE '"/img/[^"]+"' | tr -d '"' | sort -u); do
     [ -f "public$ASSET" ] || MISSING="$MISSING$ASSET
 "
   done
+
+  for REF in $(scan_files 'ASSET_PATHS\.[a-z]+\}/[^\`"]+' "$SOURCE_FILES" |
+    grep -oE 'ASSET_PATHS\.[a-z]+\}/[^`"]+' | sort -u); do
+    KEY=${REF#ASSET_PATHS.}
+    KEY=${KEY%%\}*}
+    FILE=${REF#*\}/}
+    FOLDER=$(resolve_asset_key "$KEY")
+    if [ -z "$FOLDER" ]; then
+      MISSING="$MISSING(unknown ASSET_PATHS key) $KEY
+"
+    elif [ ! -f "public/img/$FOLDER/$FILE" ]; then
+      MISSING="$MISSING/img/$FOLDER/$FILE
+"
+    fi
+  done
+
   if [ -n "$MISSING" ]; then
     echo "blocked: source references a public asset that is not on disk."
     echo "a path under public/ is only a string, so the type checker cannot see this."
