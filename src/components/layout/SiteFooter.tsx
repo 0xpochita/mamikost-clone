@@ -1,12 +1,8 @@
 import { Mail, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { MamikosLogo } from "@/components/layout/MamikosLogo";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  XIcon,
-} from "@/components/layout/SocialIcons";
 import { ASSET_PATHS } from "@/config/assets";
 import {
   CONTACT_EMAIL,
@@ -29,13 +25,17 @@ const STORE_BADGES = [
   },
 ];
 
-const SOCIAL_ICONS = [FacebookIcon, XIcon, InstagramIcon];
+const SOCIAL_LINKS = [
+  { label: "Facebook", href: "https://facebook.com", Icon: FaFacebook },
+  { label: "X", href: "https://x.com", Icon: FaXTwitter },
+  { label: "Instagram", href: "https://instagram.com", Icon: FaInstagram },
+];
 
 function FooterBrand() {
   return (
     <div className="max-w-sm">
       <MamikosLogo className="h-7 w-auto" />
-      <p className="mt-5 text-sm leading-6 text-ink-2">
+      <p className="mt-5 text-base leading-7 text-ink-2">
         Dapatkan "info kost murah" hanya di MamiKos App. Mau "Sewa Kost Murah"?
       </p>
       <div className="mt-5 flex flex-wrap gap-3">
@@ -72,7 +72,7 @@ function FooterLinkColumn({ title }: { title: string }) {
         {column.links.map((link) => (
           <li key={link.href}>
             <Link
-              className="text-sm text-ink-2 hover:text-mami"
+              className="text-base text-ink-2 hover:text-mami"
               href={link.href}
             >
               {link.label}
@@ -88,7 +88,7 @@ function FooterContact() {
   return (
     <div>
       <h2 className="text-sm font-bold tracking-wide text-ink">HUBUNGI KAMI</h2>
-      <ul className="mt-6 flex flex-col gap-4 text-sm text-ink-2">
+      <ul className="mt-6 flex flex-col gap-4 text-base text-ink-2">
         <li className="flex items-center gap-3">
           <Mail aria-hidden className="size-4 shrink-0 text-mute" />
           {CONTACT_EMAIL}
@@ -98,9 +98,18 @@ function FooterContact() {
           {CONTACT_PHONE}
         </li>
       </ul>
-      <div className="mt-6 flex gap-5 text-ink">
-        {SOCIAL_ICONS.map((Icon) => (
-          <Icon className="size-5" key={Icon.name} />
+      <div className="mt-6 flex gap-5">
+        {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+          <a
+            aria-label={label}
+            className="text-ink transition-colors hover:text-mami"
+            href={href}
+            key={label}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon aria-hidden className="size-6" />
+          </a>
         ))}
       </div>
     </div>
@@ -117,7 +126,7 @@ export function SiteFooter() {
         <FooterContact />
       </div>
       <div className="border-t border-line">
-        <div className="mami-container flex flex-col items-center gap-4 py-6 sm:flex-row sm:justify-between">
+        <div className="mami-container flex flex-col items-center gap-4 pb-24 pt-8 sm:flex-row sm:justify-between">
           <Image
             alt="Sertifikasi ISO SGS"
             height={56}
@@ -125,7 +134,7 @@ export function SiteFooter() {
             unoptimized
             width={58}
           />
-          <p className="text-sm text-ink-2">
+          <p className="text-base text-ink-2">
             © 2026 Mamikos.com. All rights reserved
           </p>
         </div>
