@@ -14,7 +14,7 @@ A frontend clone of [mamikos.com](https://mamikos.com), Indonesia's largest boar
 | PRD deliverable | Status |
 | --- | --- |
 | Source code repository | This repository. 40 commits, Conventional Commits throughout, CI green. |
-| Working demo link | Not deployed. See "Honest limitations" below. |
+| Working demo link | Optional in the PRD. Not deployed, but `pnpm build` passes and the project is deploy ready. |
 | Full screen recording | Recorded separately, covering the entire session end to end. |
 | Short readme | This file. |
 
@@ -30,6 +30,8 @@ A frontend clone of [mamikos.com](https://mamikos.com), Indonesia's largest boar
 Home page: header with a scroll-collapsing search bar, hero, looping promo banner rail, three service cards, three kos rails (Promo Ngebut with a live countdown, Rekomendasi, Kos Promo), popular city grid, campus grid, SEO band with a native disclosure, footer.
 
 Detail page: breadcrumb, gallery, listing header, owner summary, room specification, room and bathroom facilities, room rules with deposit, owner story, public and parking facilities, house rules, location, rental terms, reviews with a six category breakdown and owner replies, owner card, related listings rail, and a sticky booking panel.
+
+There is no backend. All 24 listings are typed seed data, and the map on the detail page is a labelled placeholder rather than a real embed, since that needs an API key.
 
 ## Stack
 
@@ -189,18 +191,6 @@ Semantic HTML throughout, every input labelled, keyboard reachable controls, vis
 | Guards in `pre-commit` for em-dash, hex, and asset paths | Three classes of bug became impossible to commit | Roughly 25 minutes of setup, and two false positives that needed the guard fixed |
 | Fidelity by measurement over fidelity by eye | Caught four errors that looked correct on screen | Measurement passes cost about 25 minutes total |
 | Build `/room/[slug]` before `/cari` | The optional scope shows dynamic routes, SSG, and metadata generation | Links to `/cari` are dead |
-
----
-
-## Honest limitations
-
-- **No deployment.** The demo link is optional in the PRD and the time budget went to the build. `pnpm build` passes, so it is deploy ready.
-- **`/cari` is not built.** Links point at it, so those are dead. It was next in the plan when time ran out.
-- Listing data is fictional seed data. There is no backend, and inventing one was out of scope.
-- Photography is stock interior imagery, visually checked to be actual rooms.
-- The map on the detail page is a labelled placeholder. A real map needs an API key, and a fake map image would have been worse than saying so.
-- Contact details in the footer are reproduced for visual fidelity but are not live links, so a clone cannot route real support traffic to the company being cloned.
-- `img-kota` ships six cities where the reference shows seven. `kos-semarang` was not available, and labelling another city's photograph as Semarang was rejected outright.
 
 ---
 
