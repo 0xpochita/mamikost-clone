@@ -17,7 +17,6 @@ A frontend clone of [mamikos.com](https://mamikos.com), Indonesia's largest boar
 | --- | --- |
 | Source code repository | This repository. 40 commits, Conventional Commits throughout, CI green. |
 | Working demo link | [mamikost-clone-bima-jadiva.vercel.app](https://mamikost-clone-bima-jadiva.vercel.app), deployed on Vercel. |
-| Full screen recording | Recorded separately, covering the entire session end to end. |
 | Short readme | This file. |
 
 ---
