@@ -15,7 +15,11 @@ const CARD_SIZES = "(max-width: 767px) 80vw, (max-width: 1199px) 45vw, 23vw";
  * the whole frame instead of cropping it. */
 function KosPhoto({ kos }: { kos: Kos }) {
   return (
-    <div className="relative aspect-5/3 w-full overflow-hidden rounded-card shadow-[0_0_0_1px_var(--color-line)]">
+    <div
+      className={`relative aspect-5/3 w-full overflow-hidden shadow-[0_0_0_1px_var(--color-line)] ${
+        kos.flashRibbon ? "rounded-t-card" : "rounded-card"
+      }`}
+    >
       <Image
         alt=""
         aria-hidden
@@ -75,11 +79,11 @@ function FlashRibbon({ ribbon }: { ribbon: NonNullable<Kos["flashRibbon"]> }) {
   const { className, src, alt } = RIBBON[ribbon];
   return (
     <div
-      className={`-mt-2 flex items-center justify-center rounded-b-card py-1.5 ${className}`}
+      className={`flex items-center justify-center rounded-b-card py-1 ${className}`}
     >
       <Image
         alt={alt}
-        className="h-5 w-auto"
+        className="h-6 w-auto"
         height={72}
         src={src}
         width={456}
