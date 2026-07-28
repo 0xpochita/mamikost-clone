@@ -19,6 +19,9 @@
 
   --color-line: #e8e8e8;
   --color-surface: #f6f6f6;
+  --color-surface-soft: #fafafa;
+  --color-ribbon-rare: #eae5ff;
+  --color-ribbon-deposit: #ffdefb;
 
   --radius-card: 8px;
 
@@ -33,6 +36,15 @@
 body {
   background: #fff;
   color: var(--color-ink);
+}
+
+/* Tailwind v4 preflight no longer sets a pointer cursor on buttons, so the
+   browser default of `cursor: default` applies and interactive controls stop
+   feeling clickable. Disabled controls keep the default on purpose. */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+summary {
+  cursor: pointer;
 }
 
 .mami-container {
