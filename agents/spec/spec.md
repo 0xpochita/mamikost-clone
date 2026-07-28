@@ -153,6 +153,70 @@ Types in `(landing)/types/kos.ts`. Seed in `data/kosSeed.ts`, typed with `satisf
 - Any route-level render failure: `error.tsx` with a retry.
 - No loading skeletons on the home page, because nothing there is async. Adding them would be decoration.
 
-## 9. Definition of done
+## 9. Decisions the code cannot state itself
+
+Section 5 of the rules bans comments, so the reasoning behind the non-obvious choices lives here instead. Each one is a decision someone could otherwise mistake for an accident and "fix".
+
+### Kos card photo
+
+Mamikos fills the photo box with a blurred copy of the same image and lays the sharp one over it at `height: 105%` with `width: auto`. Sources are almost never the slot ratio, and this shows the whole frame instead of cropping it. The soft vertical bars on some cards are the design working, not a bug. Seed photos are 800 by 534 into a 5:3 slot, so the bars appear naturally.
+
+### Kos card rating slot
+
+The card renders the promo line when `promoLabel` exists and the rating line when it does not. Same slot, one rule, no boolean prop. Adding a `showRating` flag would let the two disagree.
+
+### Flash ribbon corners
+
+When a ribbon is present the photo rounds only its top corners and the ribbon rounds only its bottom ones, so the two read as a single shape. Rounding both and overlapping them with a negative margin makes each eat the other.
+
+### Hero illustration
+
+Decorative, so `alt=""` and no preload: the LCP element is the heading, and preloading three quarters of a megabyte to sit behind text is the wrong trade. The supplied artwork strokes at `#bfbfc1` while the reference renders near `#e7e8ec`; over white that is an alpha near 0.4, applied in CSS rather than by re-exporting the asset. The section clips its own overflow, because a negative offset once pushed the artwork onto the section below.
+
+### Header
+
+`NAV_ITEM_CLASS` reproduces `.nav-search:hover:after` from the production stylesheet: a 3px brand bar pinned to the bottom of a full-height item, radius `2px 2px 0 0`. `TopBarEntry` reproduces `.nav-topbar-label`: 12px, weight 700, `#757575`, 18px line box, 8px between glyph and label. Past 240px of scroll the wordmark clips to its mark so the search field can move into the bar; the top strip stays, because the reference keeps it visible when scrolled.
+
+The compact wordmark is the same asset clipped by a narrower box, not a second file. The mark sits to the left of the lettering, so `overflow-hidden` at 36px yields the mark alone with no extra request.
+
+### Banner rail
+
+Three copies of the list, parked on the middle one. When a scroll drifts into an outer copy it is teleported back by exactly one copy width, which is visually identical, so the rail never reaches an end. Duplicate copies carry `aria-hidden`, `tabIndex={-1}`, and an empty `alt`, otherwise a screen reader announces thirteen promos three times and Tab walks thirty-nine links.
+
+### Countdown
+
+The clock starts only after mount. Rendering a real time on the server hydrates against a different second and warns, so the first paint is a placeholder on both sides and therefore always matches.
+
+### City selector
+
+Filters a list the server already sent, using local state rather than the URL. Reading `searchParams` on `/` would opt the whole home page out of static rendering for a browsing convenience. The shareable filter lives on `/cari`, and `Lihat semua` carries the choice there.
+
+### Asset paths
+
+A path under `public/` is only ever a string, so the type checker cannot notice when a folder is renamed. It happened three times in one session. `ASSET_PATHS` turns a folder move into one edit, and the `pre-commit` guard reads that same map so the hook can never drift from the config.
+
+Banner paths carry their own extension because the supplied set mixes webp, png, and jpg. Rebuilding a path from an index plus an assumed extension silently 404s six of the thirteen.
+
+### Config stays React-free
+
+`SearchMenuIcon` is a discriminated union of an asset path or a glyph key. The header maps the key to a component, so `config/` never imports React and stays a plain data module. Adding a glyph name without registering its component fails at compile time.
+
+### Campus logos
+
+Sources range from 240px to 1440px and three of the seven are not square, so they are drawn with `object-contain` inside a fixed square box. `object-cover` would crop a university crest.
+
+### City tile labels
+
+White text sits on uncontrolled photography with bright skies directly behind the label, so a scrim carries the contrast rather than hope.
+
+### Vector marks
+
+Brand SVGs pass through `next/image` with `unoptimized`. Vector art needs no raster pipeline, and this avoids opting the whole app into SVG handling in the optimizer.
+
+### `priority` is deprecated
+
+Next.js 16 deprecated `priority` in favour of `preload`, and its own docs recommend `loading="eager"` or `fetchPriority` over `preload` in most cases. Above-the-fold marks use `loading="eager"`.
+
+## 10. Definition of done
 
 Section 13 of the rules, applied per plan item.
