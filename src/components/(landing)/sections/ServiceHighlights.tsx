@@ -1,8 +1,9 @@
 import Image from "next/image";
+import type { PartnerLogo } from "@/components/(landing)/types/promo";
 import { PromoCard } from "@/components/(landing)/ui/PromoCard";
 import { ASSET_PATHS } from "@/config/assets";
 
-const PARTNER_LOGOS = [
+const PARTNER_LOGOS: PartnerLogo[] = [
   {
     alt: "Singgahsini",
     src: `${ASSET_PATHS.brand}/logo-singgahsini.svg`,
@@ -56,6 +57,8 @@ function OwnerCardMedia() {
   );
 }
 
+const DOT_FADE = "linear-gradient(to bottom right, transparent 35%, black 95%)";
+
 function SurveyCardMedia() {
   return (
     <div
@@ -63,10 +66,10 @@ function SurveyCardMedia() {
       className="pointer-events-none absolute bottom-0 right-0 h-28 w-64"
       style={{
         backgroundImage:
-          "radial-gradient(circle, var(--color-mami) 1.5px, transparent 1.5px)",
-        backgroundSize: "16px 16px",
-        maskImage: "linear-gradient(to bottom right, transparent, black)",
-        WebkitMaskImage: "linear-gradient(to bottom right, transparent, black)",
+          "radial-gradient(circle, var(--color-mami) 2px, transparent 2px)",
+        backgroundSize: "14px 14px",
+        maskImage: DOT_FADE,
+        WebkitMaskImage: DOT_FADE,
       }}
     />
   );

@@ -25,6 +25,8 @@
 
   --radius-card: 8px;
 
+  --shadow-card: 0 2px 12px rgb(0 0 0 / 0.08);
+
   --text-hero: 32px;
   --text-hero--line-height: 42px;
   --text-lead: 20px;
