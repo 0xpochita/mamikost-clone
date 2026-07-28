@@ -1,18 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { Kos } from "@/components/(landing)/types/kos";
+import type { CityFilteredKosRailProps } from "@/components/(landing)/types/rail";
 import { KosRail } from "@/components/(landing)/ui/KosRail";
 
 export const ALL_CITIES_LABEL = "Semua Kota";
-
-type CityFilteredKosRailProps = {
-  title: string;
-  kos: Kos[];
-  cities: string[];
-  seeAllHref: string;
-  hasCountdown?: boolean;
-};
 
 /** Filters a list the server already sent, using local state rather than the
  * URL. Reading `searchParams` here would opt the whole home page out of static

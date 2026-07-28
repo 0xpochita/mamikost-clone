@@ -1,9 +1,5 @@
 import { ChevronDown } from "lucide-react";
-
-type MamikosFeature = {
-  title: string;
-  body: string;
-};
+import type { MamikosFeature } from "@/components/(landing)/types/rail";
 
 const FEATURES: MamikosFeature[] = [
   {

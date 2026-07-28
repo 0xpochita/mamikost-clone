@@ -1,10 +1,5 @@
+import type { PromoBanner } from "@/components/(landing)/types/promo";
 import { ASSET_PATHS } from "@/config/assets";
-
-export type PromoBanner = {
-  src: string;
-  alt: string;
-  href: string;
-};
 
 export const BANNER_INTRINSIC_WIDTH = 817;
 export const BANNER_INTRINSIC_HEIGHT = 346;

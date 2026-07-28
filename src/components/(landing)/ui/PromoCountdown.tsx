@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { CountdownRemaining } from "@/components/(landing)/types/rail";
 
 const MS_PER_SECOND = 1000;
 const SECONDS_PER_MINUTE = 60;
@@ -8,19 +9,12 @@ const SECONDS_PER_HOUR = 3600;
 const SECONDS_PER_DAY = 86_400;
 const PLACEHOLDER = "--";
 
-type Remaining = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
-
 function endOfCurrentMonth(): number {
   const now = new Date();
   return new Date(now.getFullYear(), now.getMonth() + 1, 1).getTime();
 }
 
-function remainingUntil(target: number): Remaining {
+function remainingUntil(target: number): CountdownRemaining {
   const totalSeconds = Math.max(
     0,
     Math.floor((target - Date.now()) / MS_PER_SECOND),
@@ -49,7 +43,7 @@ function Cell({ children }: { children: string }) {
  * hydrate against a different second and warn, so the first paint is a
  * placeholder on both sides and therefore always matches. */
 export function PromoCountdown() {
-  const [remaining, setRemaining] = useState<Remaining | null>(null);
+  const [remaining, setRemaining] = useState<CountdownRemaining | null>(null);
 
   useEffect(() => {
     const deadline = endOfCurrentMonth();

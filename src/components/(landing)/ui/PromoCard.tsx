@@ -1,19 +1,8 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-
-export type PromoCardAction = {
-  label: string;
-  href: string;
-  variant: "outline" | "link";
-};
-
-type PromoCardProps = {
-  title: string;
-  description: string;
-  action?: PromoCardAction;
-  media?: ReactNode;
-  className?: string;
-};
+import type {
+  PromoCardAction,
+  PromoCardProps,
+} from "@/components/(landing)/types/promo";
 
 const ACTION_CLASS: Record<PromoCardAction["variant"], string> = {
   outline:
@@ -34,7 +23,7 @@ export function PromoCard({
 }: PromoCardProps) {
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border border-line bg-white ${className}`}
+      className={`relative overflow-hidden rounded-xl bg-white shadow-card ${className}`}
     >
       {media}
       <div className="relative z-10 max-w-[62%] px-7 py-7">

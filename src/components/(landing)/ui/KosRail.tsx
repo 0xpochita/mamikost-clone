@@ -3,7 +3,10 @@
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import type { Kos } from "@/components/(landing)/types/kos";
+import type {
+  CityPickerProps,
+  KosRailProps,
+} from "@/components/(landing)/types/rail";
 import { KosCard } from "@/components/(landing)/ui/KosCard";
 import { PromoCountdown } from "@/components/(landing)/ui/PromoCountdown";
 
@@ -11,25 +14,7 @@ const CARD_SCROLL_STEP = 300;
 const ARROW_CLASS =
   "flex size-10 items-center justify-center rounded-full border border-line bg-white text-ink transition-colors hover:border-mami hover:text-mami disabled:opacity-40";
 
-type KosRailProps = {
-  title: string;
-  kos: Kos[];
-  seeAllHref: string;
-  cities?: string[];
-  selectedCity?: string;
-  onCityChange?: (city: string) => void;
-  hasCountdown?: boolean;
-};
-
-function CityPicker({
-  cities,
-  selected,
-  onChange,
-}: {
-  cities: string[];
-  selected: string;
-  onChange: (city: string) => void;
-}) {
+function CityPicker({ cities, selected, onChange }: CityPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
 
