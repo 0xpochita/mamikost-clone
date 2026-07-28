@@ -1,0 +1,7 @@
+if grep -q '—' "$1"; then
+  echo "blocked: em-dash character in commit message (rules section 3)."
+  echo "use a hyphen or a colon instead."
+  exit 1
+fi
+
+./node_modules/.bin/commitlint --edit "$1"

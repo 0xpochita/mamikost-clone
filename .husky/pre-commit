@@ -1,0 +1,38 @@
+BIOME="./node_modules/.bin/biome"
+
+"$BIOME" check --staged --no-errors-on-unmatched || exit 1
+
+# husky runs hooks through `sh -e`, so any command that legitimately exits
+# non-zero aborts the hook with no output. grep returns 1 when it finds
+# nothing, which is the success case here, hence every `|| true`.
+staged_files() {
+  git diff --cached --name-only --diff-filter=ACM -- "$@" || true
+}
+
+scan_files() {
+  printf '%s\n' "$2" | tr '\n' '\0' | xargs -0 grep -nE "$1" 2>/dev/null || true
+}
+
+TEXT_FILES=$(staged_files '*.ts' '*.tsx' '*.css' '*.md' '*.mjs' '*.json')
+if [ -n "$TEXT_FILES" ]; then
+  EM_DASH=$(scan_files '—' "$TEXT_FILES")
+  if [ -n "$EM_DASH" ]; then
+    echo "blocked: em-dash character found (rules section 3)."
+    echo "use a hyphen, a colon, or parentheses instead."
+    printf '%s\n' "$EM_DASH"
+    exit 1
+  fi
+fi
+
+COMPONENT_FILES=$(staged_files '*.tsx')
+if [ -n "$COMPONENT_FILES" ]; then
+  HEX=$(scan_files '#[0-9a-fA-F]{6}([^0-9a-fA-F]|$)' "$COMPONENT_FILES")
+  if [ -n "$HEX" ]; then
+    echo "blocked: hex colour literal outside globals.css (rules section 6)."
+    echo "define it as a token in globals.css and use the utility class."
+    printf '%s\n' "$HEX"
+    exit 1
+  fi
+fi
+
+exit 0
