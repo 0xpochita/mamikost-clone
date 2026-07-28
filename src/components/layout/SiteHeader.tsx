@@ -37,7 +37,7 @@ const NAV_ITEM_CLASS =
 function TopBarEntry({ link }: { link: TopBarLink }) {
   return (
     <Link
-      className="flex items-center gap-2 text-xs font-bold leading-4.5 text-mute transition-colors hover:text-mami"
+      className="flex items-center gap-2 text-xs font-black leading-4.5 text-mute transition-colors hover:text-mami"
       href={link.href}
     >
       <Image
@@ -188,9 +188,9 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
-/** Once the hero search has scrolled away the bar collapses: the top strip and
- * the wordmark give up their space so the search field can move into the bar
- * itself, which is what the reference does. */
+/** Once the hero search has scrolled away the wordmark shrinks to its mark so
+ * the search field can move into the bar itself. The top strip stays put: the
+ * reference keeps it visible in the scrolled state. */
 function useCompactHeader() {
   const [isCompact, setIsCompact] = useState(false);
 
@@ -240,7 +240,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-white">
-      {isCompact ? null : <HeaderTopBar />}
+      <HeaderTopBar />
       <div className="border-b border-line">
         <div className="mami-container flex h-14 items-center justify-between gap-6 lg:h-16">
           <div className="flex flex-1 items-center gap-3">
