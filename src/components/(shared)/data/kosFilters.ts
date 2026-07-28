@@ -1,4 +1,4 @@
-import type { KosSortKey, KosType } from "@/components/(landing)/types/kos";
+import type { KosSortKey, KosType } from "@/components/(shared)/types/kos";
 import { ASSET_PATHS } from "@/config/assets";
 
 export const KOS_TYPES = [

@@ -7,8 +7,8 @@ import type {
   CityPickerProps,
   KosRailProps,
 } from "@/components/(landing)/types/rail";
-import { KosCard } from "@/components/(landing)/ui/KosCard";
 import { PromoCountdown } from "@/components/(landing)/ui/PromoCountdown";
+import { KosCard } from "@/components/(shared)/ui/KosCard";
 
 const CARD_SCROLL_STEP = 300;
 const ARROW_CLASS =

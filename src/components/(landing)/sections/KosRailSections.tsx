@@ -1,8 +1,8 @@
+import { CityFilteredKosRail } from "@/components/(landing)/ui/CityFilteredKosRail";
 import {
   listKosCities,
   searchKos,
-} from "@/components/(landing)/data/kosRepository";
-import { CityFilteredKosRail } from "@/components/(landing)/ui/CityFilteredKosRail";
+} from "@/components/(shared)/data/kosRepository";
 
 export function PromoNgebutSection() {
   return (

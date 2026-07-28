@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { POPULAR_CAMPUSES } from "@/components/(landing)/data/kosFilters";
 import { SeeAllTile } from "@/components/(landing)/ui/SeeAllTile";
+import { POPULAR_CAMPUSES } from "@/components/(shared)/data/kosFilters";
 
 const LOGO_BOX = 56;
 

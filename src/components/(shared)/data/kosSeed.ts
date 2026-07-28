@@ -1,4 +1,4 @@
-import type { Kos } from "@/components/(landing)/types/kos";
+import type { Kos } from "@/components/(shared)/types/kos";
 
 export const KOS_LISTINGS = [
   {

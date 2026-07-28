@@ -100,7 +100,7 @@ export function BannerRail() {
           <ChevronLeft aria-hidden className="size-5" />
         </button>
         <Link
-          className="text-base font-bold text-ink hover:text-mami"
+          className="text-sm font-extrabold text-ink hover:text-mami"
           href="/promo"
         >
           Lihat semua promo

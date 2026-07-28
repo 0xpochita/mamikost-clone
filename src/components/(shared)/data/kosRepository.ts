@@ -1,9 +1,9 @@
-import { KOS_LISTINGS } from "@/components/(landing)/data/kosSeed";
+import { KOS_LISTINGS } from "@/components/(shared)/data/kosSeed";
 import type {
   Kos,
   KosQuery,
   KosSortKey,
-} from "@/components/(landing)/types/kos";
+} from "@/components/(shared)/types/kos";
 
 const DEFAULT_RELATED_LIMIT = 4;
 
@@ -56,4 +56,8 @@ export function findRelatedKos(kos: Kos, limit = DEFAULT_RELATED_LIMIT): Kos[] {
 
 export function listKosCities(): string[] {
   return [...new Set(KOS_LISTINGS.map((kos) => kos.city))].sort();
+}
+
+export function listKosSlugs(): string[] {
+  return KOS_LISTINGS.map((kos) => kos.slug);
 }

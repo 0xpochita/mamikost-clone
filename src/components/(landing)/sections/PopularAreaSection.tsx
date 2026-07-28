@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { POPULAR_AREAS } from "@/components/(landing)/data/kosFilters";
 import { SeeAllTile } from "@/components/(landing)/ui/SeeAllTile";
+import { POPULAR_AREAS } from "@/components/(shared)/data/kosFilters";
 
 const TILE_SIZES = "(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 280px";
 

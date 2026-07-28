@@ -1,3 +1,4 @@
+export { LandingPage } from "@/components/(landing)/LandingPage";
 export {
   FACILITY_OPTIONS,
   KOS_TYPES,
@@ -5,22 +6,21 @@ export {
   POPULAR_CAMPUSES,
   PRICE_CEILINGS,
   SORT_OPTIONS,
-} from "@/components/(landing)/data/kosFilters";
+} from "@/components/(shared)/data/kosFilters";
 export {
   findKosBySlug,
   findRelatedKos,
   listKosCities,
   searchKos,
-} from "@/components/(landing)/data/kosRepository";
-export { LandingPage } from "@/components/(landing)/LandingPage";
+} from "@/components/(shared)/data/kosRepository";
 export type {
   Kos,
   KosBadge,
   KosQuery,
   KosSortKey,
   KosType,
-} from "@/components/(landing)/types/kos";
+} from "@/components/(shared)/types/kos";
 export {
   formatRupiah,
   formatRupiahCompact,
-} from "@/components/(landing)/utils/formatCurrency";
+} from "@/components/(shared)/utils/formatCurrency";

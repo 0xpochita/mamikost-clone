@@ -41,7 +41,7 @@ export function HeroSection() {
           <h1 className="text-3xl font-black leading-tight text-ink-3 lg:text-hero">
             Mau cari kos?
           </h1>
-          <p className="mt-1 text-base text-ink-3 lg:text-lead">
+          <p className="mt-1 font-semibold text-base text-ink-3 lg:text-lead">
             Dapatkan infonya dan langsung sewa di Mamikos.
           </p>
           <HeroSearchField />

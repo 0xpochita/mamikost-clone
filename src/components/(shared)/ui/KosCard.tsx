@@ -1,8 +1,8 @@
 import { Gift, Star, Ticket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Kos } from "@/components/(landing)/types/kos";
-import { formatRupiah } from "@/components/(landing)/utils/formatCurrency";
+import type { Kos } from "@/components/(shared)/types/kos";
+import { formatRupiah } from "@/components/(shared)/utils/formatCurrency";
 import { ASSET_PATHS } from "@/config/assets";
 
 const PHOTO_INTRINSIC_WIDTH = 800;

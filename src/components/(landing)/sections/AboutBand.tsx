@@ -63,7 +63,7 @@ export function AboutBand() {
         </p>
 
         <details className="group mt-8">
-          <summary className="flex cursor-pointer list-none items-center justify-center gap-2 text-base font-bold text-ink hover:text-mami">
+          <summary className="flex cursor-pointer list-none items-center justify-center gap-2 text-xl font-bold text-ink hover:text-gray-600">
             Fitur yang dapat dimanfaatkan di Mamikos
             <ChevronDown
               aria-hidden
