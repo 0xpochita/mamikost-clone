@@ -15,7 +15,7 @@ function HeroSearchField() {
       <label className="sr-only" htmlFor="hero-search">
         Cari kos berdasarkan lokasi, area, atau alamat
       </label>
-      <Search aria-hidden className="ml-2.5 size-6 shrink-0 text-mute-2" />
+      <Search aria-hidden className="ml-2.5 size-6 shrink-0 text-ink" />
       <input
         className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-ink outline-none placeholder:font-semibold placeholder:text-mute-2"
         id="hero-search"

@@ -215,7 +215,7 @@ function HeaderSearchField() {
       <label className="sr-only" htmlFor="header-search">
         Cari kos berdasarkan lokasi, area, atau alamat
       </label>
-      <Search aria-hidden className="ml-2.5 size-5 shrink-0 text-mute-2" />
+      <Search aria-hidden className="ml-2.5 size-6 shrink-0 text-ink" />
       <input
         className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-ink outline-none placeholder:font-semibold placeholder:text-mute-2"
         id="header-search"
@@ -243,24 +243,24 @@ export function SiteHeader() {
       {isCompact ? null : <HeaderTopBar />}
       <div className="border-b border-line">
         <div className="mami-container flex h-14 items-center justify-between gap-6 lg:h-16">
-          <Link aria-label="Beranda Mamikos" href="/">
-            {/* The wordmark sits to the right of the mark in one asset, so the
-                compact state clips the box instead of loading a second file. */}
-            <span
-              className={`block overflow-hidden ${isCompact ? "w-9" : "w-[123px] lg:w-[136px]"}`}
-            >
-              <MamikosLogo
-                className="h-5 w-[123px] max-w-none lg:h-[30px] lg:w-[136px]"
-                isEager
-              />
-            </span>
-          </Link>
+          <div className="flex flex-1 items-center gap-3">
+            <Link aria-label="Beranda Mamikos" className="shrink-0" href="/">
+              <span
+                className={`block overflow-hidden ${isCompact ? "w-9" : "w-[123px] lg:w-[136px]"}`}
+              >
+                <MamikosLogo
+                  className="h-5 w-[123px] max-w-none lg:h-[30px] lg:w-[136px]"
+                  isEager
+                />
+              </span>
+            </Link>
 
-          {isCompact ? (
-            <div className="hidden max-w-[470px] flex-1 lg:flex">
-              <HeaderSearchField />
-            </div>
-          ) : null}
+            {isCompact ? (
+              <div className="hidden w-full max-w-[470px] lg:block">
+                <HeaderSearchField />
+              </div>
+            ) : null}
+          </div>
 
           <div className="hidden h-full items-center lg:flex">
             <SearchMenu />
