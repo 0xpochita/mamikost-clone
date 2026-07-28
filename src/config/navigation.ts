@@ -35,7 +35,7 @@ export const TOP_BAR_LEFT_LINKS: TopBarLink[] = [
 export const TOP_BAR_RIGHT_LINK: TopBarLink = {
   label: "Promosikan Iklan Anda",
   href: "/pemilik/daftar",
-  icon: `${ASSET_PATHS.icon}/icon_TIDAK_ADA.svg`,
+  icon: `${ASSET_PATHS.icon}/icon-promote.svg`,
 };
 
 export const MAIN_NAV_LINKS: NavLink[] = [
@@ -43,11 +43,48 @@ export const MAIN_NAV_LINKS: NavLink[] = [
   { label: "Syarat dan Ketentuan", href: "/syarat" },
 ];
 
-export const SEARCH_MENU_LINKS: NavLink[] = [
-  { label: "Cari Kos", href: "/cari" },
-  { label: "Cari Apartemen", href: "/cari?kategori=apartemen" },
-  { label: "Cari Kos Andalan", href: "/cari?badge=andalan" },
-  { label: "Cari Kos Promo", href: "/cari?badge=promo" },
+export const SEARCH_MENU_ICON_SIZE = 24;
+
+/** Supplied brand marks travel as asset paths. Generic icons travel as a key
+ * that the header maps to a component, so this config never imports React and
+ * stays a plain data module. */
+export type SearchMenuIcon =
+  | { kind: "asset"; src: string }
+  | { kind: "glyph"; name: "bed" | "apartment" | "property" };
+
+export type SearchMenuLink = NavLink & {
+  icon: SearchMenuIcon;
+};
+
+export const SEARCH_MENU_LINKS: SearchMenuLink[] = [
+  {
+    label: "Kos",
+    href: "/cari",
+    icon: { kind: "glyph", name: "bed" },
+  },
+  {
+    label: "Kos Singgahsini & Apik",
+    href: "/cari?program=singgahsini",
+    icon: {
+      kind: "asset",
+      src: `${ASSET_PATHS.icon}/icon-singgahsini-no-text.svg`,
+    },
+  },
+  {
+    label: "Kos Andalan",
+    href: "/cari?badge=andalan",
+    icon: { kind: "asset", src: `${ASSET_PATHS.brand}/icon-kos-andalan.svg` },
+  },
+  {
+    label: "Apartemen",
+    href: "/cari?kategori=apartemen",
+    icon: { kind: "glyph", name: "apartment" },
+  },
+  {
+    label: "Jual-Beli Properti",
+    href: "/properti",
+    icon: { kind: "glyph", name: "property" },
+  },
 ];
 
 export const FOOTER_COLUMNS: FooterColumn[] = [

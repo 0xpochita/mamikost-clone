@@ -1,59 +1,88 @@
 "use client";
 
-import { ChevronDown, Megaphone, Menu, X } from "lucide-react";
+import { Bed, Building2, ChevronDown, House, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { MamikosLogo } from "@/components/layout/MamikosLogo";
-import { ASSET_PATHS } from "@/config/assets";
 import {
   MAIN_NAV_LINKS,
+  SEARCH_MENU_ICON_SIZE,
   SEARCH_MENU_LINKS,
+  type SearchMenuIcon,
+  TOP_BAR_ICON_SIZE,
   TOP_BAR_LEFT_LINKS,
   TOP_BAR_RIGHT_LINK,
+  type TopBarLink,
 } from "@/config/navigation";
 
-const TOP_BAR_ICON_SIZE = 16;
+/** Matches `.nav-search:hover:after` in the production stylesheet: a 3px brand
+ * bar pinned to the bottom of the full-height nav item, radius 2px 2px 0 0. */
+const NAV_ITEM_CLASS =
+  "relative flex h-full items-center px-3 text-base font-bold text-ink transition-colors hover:text-mami after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:rounded-t-[2px] after:bg-mami after:opacity-0 after:transition-opacity hover:after:opacity-100";
 
-const TOP_BAR_ICONS = [
-  `${ASSET_PATHS.icon}/icon-smartphone.svg`,
-  `${ASSET_PATHS.icon}/icon-calendar.svg`,
-];
+/** Mirrors `.nav-topbar-label`: 12px, weight 700, `#757575`, 18px line box,
+ * 8px between the glyph and its label. */
+function TopBarEntry({ link }: { link: TopBarLink }) {
+  return (
+    <Link
+      className="flex items-center gap-2 text-xs font-bold leading-4.5 text-mute transition-colors hover:text-mami"
+      href={link.href}
+    >
+      <Image
+        alt=""
+        aria-hidden
+        height={TOP_BAR_ICON_SIZE}
+        src={link.icon}
+        unoptimized
+        width={TOP_BAR_ICON_SIZE}
+      />
+      {link.label}
+    </Link>
+  );
+}
 
 function HeaderTopBar() {
   return (
-    <div className="hidden border-b border-line bg-white lg:block">
-      <div className="mami-container flex h-10 items-center justify-between text-sm text-ink-2">
-        <ul className="flex items-center gap-8">
-          {TOP_BAR_LEFT_LINKS.map((link, index) => (
+    <div className="hidden bg-surface-soft lg:block">
+      <div className="mami-container flex h-10 items-center justify-between">
+        <ul className="flex items-center gap-6">
+          {TOP_BAR_LEFT_LINKS.map((link) => (
             <li key={link.href}>
-              <Link
-                className="flex items-center gap-2 hover:text-mami"
-                href={link.href}
-              >
-                <Image
-                  alt=""
-                  aria-hidden
-                  height={TOP_BAR_ICON_SIZE}
-                  src={TOP_BAR_ICONS[index]}
-                  unoptimized
-                  width={TOP_BAR_ICON_SIZE}
-                />
-                {link.label}
-              </Link>
+              <TopBarEntry link={link} />
             </li>
           ))}
         </ul>
-        <Link
-          className="flex items-center gap-2 hover:text-mami"
-          href={TOP_BAR_RIGHT_LINK.href}
-        >
-          <Megaphone aria-hidden className="size-4 text-mute" />
-          {TOP_BAR_RIGHT_LINK.label}
-        </Link>
+        <TopBarEntry link={TOP_BAR_RIGHT_LINK} />
       </div>
     </div>
   );
+}
+
+const SEARCH_MENU_GLYPHS = {
+  bed: Bed,
+  apartment: Building2,
+  property: House,
+} as const;
+
+function SearchMenuGlyph({ icon }: { icon: SearchMenuIcon }) {
+  if (icon.kind === "asset") {
+    return (
+      <Image
+        alt=""
+        aria-hidden
+        className="size-6 shrink-0"
+        height={SEARCH_MENU_ICON_SIZE}
+        src={icon.src}
+        unoptimized
+        width={SEARCH_MENU_ICON_SIZE}
+      />
+    );
+  }
+
+  const Glyph = SEARCH_MENU_GLYPHS[icon.name];
+  return <Glyph aria-hidden className="size-6 shrink-0 text-ink" />;
 }
 
 function SearchMenu() {
@@ -80,11 +109,11 @@ function SearchMenu() {
   }, [isOpen]);
 
   return (
-    <div className="relative" ref={containerRef}>
+    <div className="relative h-full" ref={containerRef}>
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className="flex items-center gap-1.5 text-base font-bold text-ink hover:text-mami"
+        className={`${NAV_ITEM_CLASS} gap-1.5 ${isOpen ? "after:opacity-100" : ""}`}
         onClick={() => setIsOpen((wasOpen) => !wasOpen)}
         type="button"
       >
@@ -95,14 +124,15 @@ function SearchMenu() {
         />
       </button>
       {isOpen ? (
-        <ul className="absolute left-0 top-full z-10 mt-3 w-56 rounded-lg border border-line bg-white py-2 shadow-lg">
+        <ul className="absolute left-0 top-full z-10 w-72 rounded-lg border border-line bg-white py-3 shadow-lg">
           {SEARCH_MENU_LINKS.map((link) => (
             <li key={link.href}>
               <Link
-                className="block px-4 py-2.5 text-sm text-ink hover:bg-surface hover:text-mami"
+                className="flex items-center gap-4 px-5 py-3 text-base font-bold text-ink hover:bg-surface hover:text-mami"
                 href={link.href}
                 onClick={() => setIsOpen(false)}
               >
+                <SearchMenuGlyph icon={link.icon} />
                 {link.label}
               </Link>
             </li>
@@ -150,6 +180,7 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 bg-white">
@@ -160,11 +191,14 @@ export function SiteHeader() {
             <MamikosLogo isEager />
           </Link>
 
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden h-full items-center lg:flex">
             <SearchMenu />
             {MAIN_NAV_LINKS.map((link) => (
               <Link
-                className="text-base font-bold text-ink hover:text-mami"
+                aria-current={pathname === link.href ? "page" : undefined}
+                className={`${NAV_ITEM_CLASS} ${
+                  pathname === link.href ? "after:opacity-100" : ""
+                }`}
                 href={link.href}
                 key={link.href}
               >
@@ -172,7 +206,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              className="rounded-md border border-mami px-6 py-2.5 text-base font-bold text-mami hover:bg-mami-tint"
+              className="ml-3 rounded-md border border-mami px-4.5 py-2 text-base font-bold text-mami transition-colors hover:bg-mami-tint"
               href="/masuk"
             >
               Masuk
