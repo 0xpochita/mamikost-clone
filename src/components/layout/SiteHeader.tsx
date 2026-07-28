@@ -1,6 +1,14 @@
 "use client";
 
-import { Bed, Building2, ChevronDown, House, Menu, X } from "lucide-react";
+import {
+  Bed,
+  Building2,
+  ChevronDown,
+  House,
+  Menu,
+  Search,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +24,8 @@ import {
   TOP_BAR_RIGHT_LINK,
   type TopBarLink,
 } from "@/config/navigation";
+
+const COMPACT_SCROLL_THRESHOLD = 240;
 
 /** Matches `.nav-search:hover:after` in the production stylesheet: a 3px brand
  * bar pinned to the bottom of the full-height nav item, radius 2px 2px 0 0. */
@@ -178,18 +188,79 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
+/** Once the hero search has scrolled away the bar collapses: the top strip and
+ * the wordmark give up their space so the search field can move into the bar
+ * itself, which is what the reference does. */
+function useCompactHeader() {
+  const [isCompact, setIsCompact] = useState(false);
+
+  useEffect(() => {
+    function syncCompactState() {
+      setIsCompact(window.scrollY > COMPACT_SCROLL_THRESHOLD);
+    }
+    syncCompactState();
+    window.addEventListener("scroll", syncCompactState, { passive: true });
+    return () => window.removeEventListener("scroll", syncCompactState);
+  }, []);
+
+  return isCompact;
+}
+
+function HeaderSearchField() {
+  return (
+    <form
+      action="/cari"
+      className="flex h-11 flex-1 items-center gap-2 rounded-lg border border-line bg-white p-0.5 focus-within:border-mami"
+    >
+      <label className="sr-only" htmlFor="header-search">
+        Cari kos berdasarkan lokasi, area, atau alamat
+      </label>
+      <Search aria-hidden className="ml-2.5 size-5 shrink-0 text-mute-2" />
+      <input
+        className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-ink outline-none placeholder:font-semibold placeholder:text-mute-2"
+        id="header-search"
+        name="keyword"
+        placeholder="Masukan nama lokasi/area/alamat"
+        type="search"
+      />
+      <button
+        className="h-full shrink-0 rounded-md bg-mami px-6 text-sm font-bold text-white transition-colors hover:bg-mami-dark"
+        type="submit"
+      >
+        Cari
+      </button>
+    </form>
+  );
+}
+
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isCompact = useCompactHeader();
 
   return (
     <header className="sticky top-0 z-50 bg-white">
-      <HeaderTopBar />
+      {isCompact ? null : <HeaderTopBar />}
       <div className="border-b border-line">
         <div className="mami-container flex h-14 items-center justify-between gap-6 lg:h-16">
           <Link aria-label="Beranda Mamikos" href="/">
-            <MamikosLogo isEager />
+            {/* The wordmark sits to the right of the mark in one asset, so the
+                compact state clips the box instead of loading a second file. */}
+            <span
+              className={`block overflow-hidden ${isCompact ? "w-9" : "w-[123px] lg:w-[136px]"}`}
+            >
+              <MamikosLogo
+                className="h-5 w-[123px] max-w-none lg:h-[30px] lg:w-[136px]"
+                isEager
+              />
+            </span>
           </Link>
+
+          {isCompact ? (
+            <div className="hidden max-w-[470px] flex-1 lg:flex">
+              <HeaderSearchField />
+            </div>
+          ) : null}
 
           <div className="hidden h-full items-center lg:flex">
             <SearchMenu />
