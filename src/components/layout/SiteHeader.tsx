@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  ChevronDown,
-  ClipboardList,
-  Megaphone,
-  Menu,
-  Smartphone,
-  X,
-} from "lucide-react";
+import { ChevronDown, Megaphone, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MamikosLogo } from "@/components/layout/MamikosLogo";
+import { ASSET_PATHS } from "@/config/assets";
 import {
   MAIN_NAV_LINKS,
   SEARCH_MENU_LINKS,
@@ -18,27 +13,36 @@ import {
   TOP_BAR_RIGHT_LINK,
 } from "@/config/navigation";
 
-const TOP_BAR_ICONS = [Smartphone, ClipboardList];
+const TOP_BAR_ICON_SIZE = 16;
+
+const TOP_BAR_ICONS = [
+  `${ASSET_PATHS.icon}/icon-smartphone.svg`,
+  `${ASSET_PATHS.icon}/icon-calendar.svg`,
+];
 
 function HeaderTopBar() {
   return (
     <div className="hidden border-b border-line bg-white lg:block">
       <div className="mami-container flex h-10 items-center justify-between text-sm text-ink-2">
         <ul className="flex items-center gap-8">
-          {TOP_BAR_LEFT_LINKS.map((link, index) => {
-            const Icon = TOP_BAR_ICONS[index];
-            return (
-              <li key={link.href}>
-                <Link
-                  className="flex items-center gap-2 hover:text-mami"
-                  href={link.href}
-                >
-                  <Icon aria-hidden className="size-4 text-mute" />
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
+          {TOP_BAR_LEFT_LINKS.map((link, index) => (
+            <li key={link.href}>
+              <Link
+                className="flex items-center gap-2 hover:text-mami"
+                href={link.href}
+              >
+                <Image
+                  alt=""
+                  aria-hidden
+                  height={TOP_BAR_ICON_SIZE}
+                  src={TOP_BAR_ICONS[index]}
+                  unoptimized
+                  width={TOP_BAR_ICON_SIZE}
+                />
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
         <Link
           className="flex items-center gap-2 hover:text-mami"

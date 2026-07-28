@@ -5,6 +5,7 @@ const IMAGE_ROOT = "/img";
  * through here turns such a move into one edit instead of many. */
 export const ASSET_PATHS = {
   brand: `${IMAGE_ROOT}/logo-brands`,
+  icon: `${IMAGE_ROOT}/icon`,
   hero: `${IMAGE_ROOT}/img-hero`,
   banner: `${IMAGE_ROOT}/img-banner`,
   kos: `${IMAGE_ROOT}/img-kost`,
