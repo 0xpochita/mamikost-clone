@@ -68,7 +68,11 @@ fi
 
 COMPONENT_FILES=$(staged_files '*.tsx')
 if [ -n "$COMPONENT_FILES" ]; then
-  HEX=$(scan_files '#[0-9a-fA-F]{6}([^0-9a-fA-F]|$)' "$COMPONENT_FILES")
+  # Comment lines are excluded on purpose. Section 5 allows a comment that
+  # records where a value came from, and a guard that forces accurate
+  # documentation to be deleted is worse than no guard.
+  HEX=$(scan_files '#[0-9a-fA-F]{6}([^0-9a-fA-F]|$)' "$COMPONENT_FILES" |
+    grep -vE '(^|:)[0-9]+: *(//|/\*|\*)' || true)
   if [ -n "$HEX" ]; then
     echo "blocked: hex colour literal outside globals.css (rules section 6)."
     echo "define it as a token in globals.css and use the utility class."
