@@ -2,6 +2,8 @@
 
 A frontend clone of [mamikos.com](https://mamikos.com), Indonesia's largest boarding house (kos) marketplace. Built for the Frontend Engineer technical test in `agents/prd/README.md`.
 
+**Live demo:** https://mamikost-clone-bima-jadiva.vercel.app
+
 **Author:** Oktavianus Bima Jadiva
 **Programme:** Maganghub participant at PT Git Gow Ayo (Mamikos)
 
@@ -14,7 +16,7 @@ A frontend clone of [mamikos.com](https://mamikos.com), Indonesia's largest boar
 | PRD deliverable | Status |
 | --- | --- |
 | Source code repository | This repository. 40 commits, Conventional Commits throughout, CI green. |
-| Working demo link | Optional in the PRD. Not deployed, but `pnpm build` passes and the project is deploy ready. |
+| Working demo link | [mamikost-clone-bima-jadiva.vercel.app](https://mamikost-clone-bima-jadiva.vercel.app), deployed on Vercel. |
 | Full screen recording | Recorded separately, covering the entire session end to end. |
 | Short readme | This file. |
 
