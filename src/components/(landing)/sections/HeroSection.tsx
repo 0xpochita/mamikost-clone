@@ -33,6 +33,15 @@ function HeroSearchField() {
   );
 }
 
+/** The skyline is decorative, so it carries no alt text and is not preloaded:
+ * the LCP element here is the heading.
+ *
+ * The supplied artwork strokes at `#bfbfc1` while the reference renders it near
+ * `#e7e8ec`. Over white that is an alpha of roughly 0.4, so the fade is applied
+ * in CSS rather than by re-exporting the asset.
+ *
+ * The section clips its own overflow so the artwork can never spill onto the
+ * next section, which is exactly what a negative offset caused once already. */
 export function HeroSection() {
   return (
     <section className="overflow-hidden bg-white">
@@ -47,9 +56,6 @@ export function HeroSection() {
           <HeroSearchField />
         </div>
 
-        {/* The supplied artwork strokes at #bfbfc1 while the reference renders
-            near #e7e8ec. Over white that is an alpha of roughly 0.4, so the
-            fade is applied here rather than by re-exporting the asset. */}
         <Image
           alt=""
           aria-hidden
